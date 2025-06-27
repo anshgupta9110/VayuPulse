@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Connection Test - VayuPulse</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .test-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #4facfe;
+        }
+        .status {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+        .success { background: #4caf50; }
+        .error { background: #f44336; }
+        .loading { background: #ff9800; }
+        button {
+            background: #4facfe;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #3182ce;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌦️ VayuPulse API Connection Test</h1>
+        <p>Testing all API endpoints to ensure they're working properly.</p>
+        
+        <button onclick="runAllTests()">🔄 Run All Tests</button>
+        <button onclick="clearResults()">🗑️ Clear Results</button>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const apiKey = '7b94334822mshac221ccfdec8553p14bebejsn581b69669a45';
+        const headers = {
+            'X-RapidAPI-Key': apiKey,
+            'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+        };
+
+        const endpoints = [
+            {
+                name: 'Main City Weather (Delhi)',
+                url: 'https://weatherapi-com.p.rapidapi.com/forecast.json?q=New Delhi&days=1',
+                type: 'forecast'
+            },
+            {
+                name: 'City Card - Kochi',
+                url: 'https://weatherapi-com.p.rapidapi.com/current.json?q=Kochi',
+                type: 'current'
+            },
+            {
+                name: 'City Card - Kolkata',
+                url: 'https://weatherapi-com.p.rapidapi.com/current.json?q=Kolkata',
+                type: 'current'
+            },
+            {
+                name: 'City Card - Pune',
+                url: 'https://weatherapi-com.p.rapidapi.com/current.json?q=Pune',
+                type: 'current'
+            },
+            {
+                name: 'Weather Alerts',
+                url: 'https://weatherapi-com.p.rapidapi.com/forecast.json?q=Delhi&days=1',
+                type: 'alerts'
+            }
+        ];
+
+        function addResult(name, status, message = '') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = 'test-item';
+            div.innerHTML = `
+                <strong>${name}</strong>
+                <span class="status ${status}">${status.toUpperCase()}</span>
+                ${message ? `<br><small>${message}</small>` : ''}
+            `;
+            results.appendChild(div);
+        }
+
+        async function testEndpoint(endpoint) {
+            try {
+                const response = await fetch(endpoint.url, { headers });
+                const data = await response.json();
+                
+                if (response.ok) {
+                    let message = '';
+                    if (endpoint.type === 'forecast') {
+                        message = `Temperature: ${data.current.temp_c}°C, Condition: ${data.current.condition.text}`;
+                    } else if (endpoint.type === 'current') {
+                        message = `Temperature: ${data.current.temp_c}°C, Condition: ${data.current.condition.text}`;
+                    } else if (endpoint.type === 'alerts') {
+                        message = data.alerts?.alert ? `${data.alerts.alert.length} alert(s) found` : 'No alerts';
+                    }
+                    
+                    addResult(endpoint.name, 'success', message);
+                    return true;
+                } else {
+                    addResult(endpoint.name, 'error', `HTTP ${response.status}: ${data.error?.message || 'Unknown error'}`);
+                    return false;
+                }
+            } catch (error) {
+                addResult(endpoint.name, 'error', error.message);
+                return false;
+            }
+        }
+
+        async function runAllTests() {
+            document.getElementById('results').innerHTML = '';
+            addResult('Starting API Tests...', 'loading');
+            
+            let successCount = 0;
+            let totalCount = endpoints.length;
+            
+            for (const endpoint of endpoints) {
+                const success = await testEndpoint(endpoint);
+                if (success) successCount++;
+                await new Promise(resolve => setTimeout(resolve, 500)); // Small delay between tests
+            }
+            
+            addResult('Test Summary', 'success', `${successCount}/${totalCount} endpoints working correctly`);
+            
+            if (successCount === totalCount) {
+                addResult('🎉 All tests passed! Your weather app should work perfectly.', 'success');
+            } else {
+                addResult('⚠️ Some tests failed. Check the errors above.', 'error');
+            }
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+        }
+
+        // Auto-run tests when page loads
+        window.addEventListener('load', () => {
+            setTimeout(runAllTests, 1000);
+        });
+    </script>
+</body>
+</html> 

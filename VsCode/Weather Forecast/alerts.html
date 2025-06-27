@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Alerts - VayuPulse</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="alerts.css" />
+</head>
+
+<body>
+  <nav>
+    <div class="logo">🌦️VayuPulse</div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="forecast.html">Forecast</a>
+      <a href="radar.html">Radar</a>
+      <a href="alerts.html" class="active">Alerts</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div class="alerts-container">
+    <div class="alerts-header">
+      <h1>Weather Alerts & Warnings</h1>
+      <p>Stay informed with real-time weather alerts and historical weather data</p>
+      <div class="location-selector">
+        <input type="text" id="locationInput" placeholder="Enter city name..." value="New Delhi">
+        <button onclick="updateLocation()" class="location-btn">📍Update Location</button>
+      </div>
+    </div>
+
+    <!-- Live Alerts Section -->
+    <div class="alerts-section">
+      <div class="section-header">
+        <h2>Live Weather Alerts</h2>
+        <div class="update-info">
+          <span id="lastUpdate">Last updated: Loading...</span>
+          <button onclick="refreshAlerts()" class="refresh-btn">🔄Refresh</button>
+        </div>
+      </div>
+      
+      <div id="liveAlerts" class="alerts-grid">
+        <div class="loading-spinner">Loading alerts...</div>
+      </div>
+    </div>
+
+    <!-- Weather Timeline Section -->
+    <div class="timeline-section">
+      <h2>📅Weather Timeline</h2>
+      <div class="timeline-tabs">
+        <button class="tab-btn active" onclick="showDay('yesterday')">Yesterday</button>
+        <button class="tab-btn" onclick="showDay('today')">Today</button>
+        <button class="tab-btn" onclick="showDay('tomorrow')">Tomorrow</button>
+      </div>
+      
+      <div class="timeline-content">
+        <div id="yesterday" class="day-content active">
+          <div class="loading-spinner">Loading yesterday's data...</div>
+        </div>
+        <div id="today" class="day-content">
+          <div class="loading-spinner">Loading today's data...</div>
+        </div>
+        <div id="tomorrow" class="day-content">
+          <div class="loading-spinner">Loading tomorrow's data...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weather Summary Cards -->
+    <div class="summary-section">
+      <h2>📊 Weather Summary</h2>
+      <div class="summary-cards">
+        <div class="summary-card">
+          <h3>🌡️ Temperature</h3>
+          <div class="summary-data">
+            <div class="temp-range">
+              <span class="min">--°C</span>
+              <span class="current" id="currentTemp">--°C</span>
+              <span class="max">--°C</span>
+            </div>
+            <div class="temp-labels">
+              <span>Min</span>
+              <span>Current</span>
+              <span>Max</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="summary-card">
+          <h3>💧 Humidity</h3>
+          <div class="summary-data">
+            <div class="humidity-display">
+              <span id="humidityValue">--%</span>
+            </div>
+            <div class="humidity-bar">
+              <div class="humidity-fill" id="humidityFill"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="summary-card">
+          <h3>💨 Wind</h3>
+          <div class="summary-data">
+            <div class="wind-info">
+              <span id="windSpeed">-- km/h</span>
+              <span id="windDirection">--</span>
+            </div>
+            <div class="wind-icon">🌬️</div>
+          </div>
+        </div>
+        
+        <div class="summary-card">
+          <h3>👁️ Visibility</h3>
+          <div class="summary-data">
+            <div class="visibility-info">
+              <span id="visibilityValue">-- km</span>
+            </div>
+            <div class="visibility-icon">👁️</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hourly Forecast -->
+    <div class="hourly-section">
+      <h2>Hourly Forecast</h2>
+      <div id="hourlyForecast" class="hourly-grid">
+        <div class="loading-spinner">Loading hourly forecast...</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="alertBox" class="alert-box"></div>
+
+  <footer>
+    © 2025 VayuPulse | Powered by WeatherAPI & RainViewer
+  </footer>
+
+  <script>
+    // Load saved theme on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+      } else {
+        document.body.classList.remove('light-theme');
+      }
+    });
+  </script>
+  <script src="alerts.js"></script>
+</body>
+
+</html>

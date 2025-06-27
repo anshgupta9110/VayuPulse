@@ -1,0 +1,1111 @@
+:root {
+  --bg-img: url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Port_and_lighthouse_overnight_storm_with_lightning_in_Port-la-Nouvelle.jpg/960px-Port_and_lighthouse_overnight_storm_with_lightning_in_Port-la-Nouvelle.jpg");
+  --text-color: #f0f0f0;
+  --nav-bg: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  --btn-bg: #1e88e5;
+  --btn-hover: #1565c0;
+  --link: white;
+  --link-hover: #80d0c7;
+  --theme-btn-bg: rgba(255, 255, 255, 0.1);
+  --theme-btn-border: rgba(255, 255, 255, 0.3);
+  --theme-btn-hover: rgba(255, 255, 255, 0.2);
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --card-border: rgba(255, 255, 255, 0.2);
+  --chart-bg: rgba(255, 255, 255, 0.05);
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.15);
+}
+
+.light-theme {
+  --bg-img: url("https://www.bpmcdn.com/f/files/campbellriver/import/2019-05/17030897_web1_190528-CRM-weather-photo.jpg;w=960");
+  --text-color: #1a202c;
+  --nav-bg: linear-gradient(to right, #b2dfdb, #403df8, #401ffb);
+  --btn-bg: #0288d1;
+  --btn-hover: #01579b;
+  --link: #1a202c;
+  --link-hover: #2d3748;
+  --theme-btn-bg: rgba(26, 32, 44, 0.1);
+  --theme-btn-border: rgba(26, 32, 44, 0.3);
+  --theme-btn-hover: rgba(26, 32, 44, 0.2);
+  --card-bg: rgba(255, 255, 255, 0.15);
+  --card-border: rgba(255, 255, 255, 0.3);
+  --chart-bg: rgba(255, 255, 255, 0.12);
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --glass-bg: rgba(255, 255, 255, 0.2);
+  --glass-border: rgba(255, 255, 255, 0.3);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background-image: var(--bg-img);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--text-color);
+  transition: all 0.5s ease-in-out;
+  font-weight: 400;
+}
+
+nav {
+  background: var(--nav-bg);
+  padding: 14px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--link);
+  display: flex;
+  align-items: center;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.links a {
+  color: var(--link);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.links a:hover {
+  color: var(--link-hover);
+}
+
+.theme-toggle {
+  background: var(--theme-btn-bg);
+  border: 2px solid var(--theme-btn-border);
+  color: var(--link);
+  border-radius: 25px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-left: 0;
+}
+
+.theme-toggle:hover {
+  background: var(--theme-btn-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+}
+
+.theme-icon {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover .theme-icon {
+  transform: rotate(15deg);
+}
+
+.theme-text {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.dashboard {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px 40px;
+  min-height: calc(100vh - 120px);
+  box-sizing: border-box;
+  gap: 20px;
+}
+
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 300px;
+  margin-top: 40px;
+  padding-top: 20px;
+}
+
+.weather-icon img {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.weather-icon img:hover {
+  transform: scale(1.1);
+}
+
+.clock {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.center-panel {
+  flex: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+}
+
+.condition {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.description {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.city-cards {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.city-card {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 18px 30px;
+  border-radius: 14px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  min-width: 120px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.city-card:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+.city-card div {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.right-panel {
+  flex: 1;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 300px;
+}
+
+.big-temp {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.location {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+}
+
+.wind {
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.stats {
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stats div {
+  font-weight: bold;
+}
+
+.temp-graph img {
+  width: 150px;
+  opacity: 0.85;
+  transition: transform 0.3s ease;
+}
+
+.temp-graph img:hover {
+  transform: scale(1.05);
+}
+
+footer {
+  text-align: center;
+  padding: 20px 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  position: relative;
+  width: 100%;
+  margin-top: 30px;
+  backdrop-filter: blur(10px);
+}
+
+.light-theme footer {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+  color: rgba(74, 85, 104, 0.8);
+}
+
+/* ✅ Responsive Layout */
+@media screen and (max-width: 1200px) {
+  .dashboard {
+    flex-direction: column;
+    padding: 20px 10px;
+    gap: 20px;
+  }
+  .left-panel, .right-panel, .center-panel {
+    max-width: 100%;
+    width: 100%;
+    min-width: 0;
+    text-align: center;
+    align-items: center;
+  }
+  .charts-section-main {
+    padding: 20px 5px;
+  }
+  .charts-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+    padding: 10px 2vw;
+    gap: 15px;
+  }
+  .left-panel, .right-panel, .center-panel {
+    max-width: 100%;
+    width: 100%;
+    min-width: 0;
+    text-align: center;
+    align-items: center;
+  }
+  .charts-section-main {
+    padding: 10px 2vw;
+  }
+  .charts-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .city-cards {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  .summary-card, .card, .chart-container {
+    width: 100%;
+    min-width: 0;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+  .modern-chart {
+    width: 100% !important;
+    min-width: 0;
+    height: 180px !important;
+  }
+  .table-container, table {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
+  th, td {
+    white-space: nowrap;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dashboard, .charts-section-main {
+    padding: 4vw 1vw;
+  }
+  .summary-card, .card, .chart-container {
+    padding: 8px 2vw;
+    font-size: 0.95rem;
+  }
+  .modern-chart {
+    height: 120px !important;
+  }
+  .city-card {
+    padding: 10px 2vw;
+    font-size: 0.95rem;
+  }
+  .logo {
+    font-size: 18px;
+  }
+}
+
+.temp-chart {
+  width: 100%;
+  max-width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.condition-with-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.condition-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 4px rgba(0,0,0,0.6));
+}
+
+.chart-labels {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: var(--text-color);
+  opacity: 0.85;
+}
+
+.chart-labels span {
+  margin: 0 10px;
+}
+
+.temp-graph {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+}
+
+.temp-range {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  padding: 0 5px;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  display: none;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #4facfe;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-indicator p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Alert Box Styles */
+.alert-box {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  z-index: 1000;
+  display: none;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease;
+}
+
+.alert-box.success {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+}
+
+.alert-box.error {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+}
+
+.alert-box.info {
+  background: linear-gradient(135deg, #2196f3, #1976d2);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.weather-summary {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.summary-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  max-width: 180px;
+}
+
+.summary-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.summary-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.summary-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-align: center;
+  opacity: 1;
+}
+
+.summary-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 4px 3px;
+  margin: 0 -3px;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  opacity: 0.8;
+  color: var(--text-color);
+}
+
+.stat-value {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-color);
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.additional-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.temp-range-display {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  height: 120px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.temp-range-display::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  pointer-events: none;
+}
+
+.temp-min, .temp-max {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+  position: relative;
+  z-index: 1;
+}
+
+.temp-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.8;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.temp-value {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-color);
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.temp-bar {
+  flex: 1;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.temp-fill {
+  height: 100%;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  border-radius: 8px;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+}
+
+.temp-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* New Charts Section Below Dashboard */
+.charts-section-main {
+  padding: 40px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.1) 100%);
+  backdrop-filter: blur(20px);
+  margin-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.chart-container:nth-child(4) {
+  grid-column: 2;
+  grid-row: 2;
+  max-width: 400px;
+  justify-self: center;
+}
+
+.chart-container {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  padding: 25px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.chart-container:nth-child(2)::before {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.chart-container:nth-child(3)::before {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.chart-container:nth-child(4)::before {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.chart-container:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.chart-container h3 {
+  margin: 0 0 20px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-align: center;
+  opacity: 1;
+  letter-spacing: 0.5px;
+}
+
+.modern-chart {
+  width: 100% !important;
+  height: 160px !important;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.light-theme .stat-value,
+.light-theme .temp-value {
+  color: #1a202c;
+  background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.light-theme .summary-card h3,
+.light-theme .chart-container h3 {
+  color: #1a202c;
+  opacity: 1;
+}
+
+.light-theme .stat-label,
+.light-theme .temp-label {
+  color: #2d3748;
+  opacity: 0.9;
+}
+
+.light-theme .right-panel .big-temp,
+.light-theme .right-panel .location,
+.light-theme .right-panel .wind,
+.light-theme .right-panel .stats,
+.light-theme .right-panel .stats div {
+  color: white;
+}
+
+.light-theme .right-panel .stats div strong {
+  color: white;
+}
+
+/* Weather Notifications Section */
+.notification-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 24px;
+  padding: 32px;
+  margin: 30px auto;
+  max-width: 500px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.15),
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.notification-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.notification-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.notification-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 32px 80px rgba(0, 0, 0, 0.2),
+    0 16px 48px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.notification-card:hover::after {
+  opacity: 1;
+}
+
+.notification-card h3 {
+  margin: 0 0 12px 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-color);
+  text-align: center;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #fff 0%, #e0e7ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.notification-card h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+}
+
+.notification-card p {
+  margin: 0 0 24px 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  text-align: center;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.notification-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.notification-form input[type="email"] {
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 16px 20px;
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notification-form input[type="email"]:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 
+    0 0 0 4px rgba(102, 126, 234, 0.15),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.notification-form input[type="email"]::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+}
+
+.notification-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 8px 0;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.checkbox-label:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(4px);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.checkbox-label input[type="checkbox"] {
+  display: none;
+}
+
+.checkmark {
+  width: 18px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-label:hover .checkmark {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-color: #667eea;
+  transform: scale(1.1);
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+  content: '✓';
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  animation: checkmarkAppear 0.3s ease;
+}
+
+@keyframes checkmarkAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.notification-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 16px;
+  padding: 16px 32px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 8px 24px rgba(102, 126, 234, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.notification-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.notification-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 16px 40px rgba(102, 126, 234, 0.4),
+    0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.notification-btn:hover::before {
+  left: 100%;
+}
+
+.notification-btn:active {
+  transform: translateY(-2px);
+}
+
+/* Light theme adjustments for notifications */
+.light-theme .notification-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.light-theme .notification-card:hover {
+  box-shadow: 
+    0 32px 80px rgba(0, 0, 0, 0.15),
+    0 16px 48px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.light-theme .notification-card h3 {
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.light-theme .notification-card p {
+  color: #4a5568;
+}
+
+.light-theme .notification-form input[type="email"] {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  color: #1a202c;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .notification-form input[type="email"]:focus {
+  border-color: #667eea;
+  box-shadow: 
+    0 0 0 4px rgba(102, 126, 234, 0.1),
+    inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.light-theme .notification-form input[type="email"]::placeholder {
+  color: #718096;
+}
+
+.light-theme .checkbox-label {
+  color: #2d3748;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .checkbox-label:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #667eea;
+}
+
+.light-theme .checkmark {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.light-theme .checkbox-label:hover .checkmark {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+}

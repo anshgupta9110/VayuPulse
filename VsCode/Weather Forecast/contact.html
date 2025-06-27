@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - VayuPulse</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="contact.css" />
+  <!-- EmailJS CDN -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+
+<body>
+  <nav>
+    <div class="logo">🌦️VayuPulse</div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="forecast.html">Forecast</a>
+      <a href="radar.html">Radar</a>
+      <a href="alerts.html">Alerts</a>
+      <a href="contact.html" class="active">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hidden Clear All Button -->
+  <button onclick="clearAllComplaints()" class="hidden-clear-btn" title="Maintenance">🔧</button>
+
+  <div class="contact-container">
+    <div class="contact-header">
+      <h1>Contact Us</h1>
+      <p>We value your feedback! If you have any complaints, suggestions, or issues with our weather forecast service, please let us know.</p>
+    </div>
+
+    <div class="contact-content">
+      <!-- Contact Info Column -->
+      <div class="contact-info">
+        <div class="info-card">
+          <h3>📍 Our Location</h3>
+          <p>Weather Station Headquarters<br>123 Climate Street<br>Meteorology City, MC 12345</p>
+        </div>
+        
+        <div class="info-card">
+          <h3>📞 Contact Details</h3>
+          <p>📧 Email: support@vayupulse.com<br>📱 Phone: 987654321<br>🕒 Hours: 24/7 Support</p>
+        </div>
+        
+        <div class="info-card">
+          <h3>🚀 Quick Links</h3>
+          <p>📊 <a href="forecast.html">Weather Forecast</a><br>🌪️ <a href="alerts.html">Weather Alerts</a><br>📡 <a href="radar.html">Weather Radar</a></p>
+        </div>
+      </div>
+
+      <!-- Complaint Form Column -->
+      <div class="complaint-form-container">
+        <div class="form-header">
+          <h2>Submit a Complaint</h2>
+          <p>Help us improve by reporting any issues you've encountered with our weather forecast service.</p>
+        </div>
+
+        <form id="complaintForm" class="complaint-form">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your full name">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email address">
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number (optional)">
+          </div>
+
+          <div class="form-group">
+            <label for="complaintType">Type of Issue *</label>
+            <select id="complaintType" name="complaintType" required>
+              <option value="">Select the type of issue</option>
+              <option value="inaccurate-forecast">Inaccurate Weather Forecast</option>
+              <option value="website-bug">Website Bug or Error</option>
+              <option value="slow-loading">Slow Loading or Performance</option>
+              <option value="missing-data">Missing Weather Data</option>
+              <option value="location-error">Location Detection Error</option>
+              <option value="mobile-issue">Mobile App Issues</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="severity">Severity Level *</label>
+            <select id="severity" name="severity" required>
+              <option value="">Select severity level</option>
+              <option value="low">Low - Minor inconvenience</option>
+              <option value="medium">Medium - Affects usability</option>
+              <option value="high">High - Significant impact</option>
+              <option value="critical">Critical - Service unusable</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="location">Location (if relevant)</label>
+            <input type="text" id="location" name="location" placeholder="City, State, Country">
+          </div>
+
+          <div class="form-group">
+            <label for="dateTime">Date & Time of Issue</label>
+            <input type="datetime-local" id="dateTime" name="dateTime">
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject *</label>
+            <input type="text" id="subject" name="subject" required placeholder="Brief description of the issue">
+          </div>
+
+          <div class="form-group">
+            <label for="description">Detailed Description *</label>
+            <textarea id="description" name="description" rows="6" required placeholder="Please provide a detailed description of the issue you encountered. Include steps to reproduce if possible."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="expectedBehavior">Expected Behavior</label>
+            <textarea id="expectedBehavior" name="expectedBehavior" rows="3" placeholder="What did you expect to happen?"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="browser">Browser & Device (if applicable)</label>
+            <input type="text" id="browser" name="browser" placeholder="e.g., Chrome 120, iPhone 15, Android 14">
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="screenshot" name="screenshot">
+              <span class="checkmark"></span>
+              I can provide screenshots if needed
+            </label>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="followUp" name="followUp">
+              <span class="checkmark"></span>
+              I would like to be contacted for follow-up
+            </label>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="emailNotification" name="emailNotification" checked>
+              <span class="checkmark"></span>
+              Send me email confirmation
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="resetForm()">Reset Form</button>
+            <button type="submit" class="btn-primary">Submit Complaint</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Complaints List Column -->
+      <div class="complaints-list-container">
+        <div class="list-header">
+          <h2>📋 Recent Complaints</h2>
+          <div class="list-controls">
+            <button onclick="refreshComplaints()" class="refresh-btn">🔄 Refresh</button>
+          </div>
+        </div>
+        
+        <div class="complaints-filter">
+          <select id="filterSeverity" onchange="filterComplaints()">
+            <option value="all">All Severity Levels</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
+          </select>
+          <select id="filterType" onchange="filterComplaints()">
+            <option value="all">All Types</option>
+            <option value="inaccurate-forecast">Inaccurate Forecast</option>
+            <option value="website-bug">Website Bug</option>
+            <option value="slow-loading">Slow Loading</option>
+            <option value="missing-data">Missing Data</option>
+            <option value="location-error">Location Error</option>
+            <option value="mobile-issue">Mobile Issue</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div id="complaintsList" class="complaints-list">
+          <div class="no-complaints">
+            <div class="no-complaints-icon">📝</div>
+            <h3>No Complaints Yet</h3>
+            <p>Submitted complaints will appear here</p>
+          </div>
+        </div>
+
+        <div class="complaints-stats">
+          <div class="stat-item">
+            <span class="stat-label">Total Complaints</span>
+            <span class="stat-value" id="totalComplaints">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Critical Issues</span>
+            <span class="stat-value" id="criticalComplaints">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="alertBox" class="alert-box"></div>
+
+  <footer>
+    © 2025 VayuPulse | Powered by WeatherAPI & RainViewer
+  </footer>
+
+  <script>
+    // Load saved theme on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+      } else {
+        document.body.classList.remove('light-theme');
+      }
+    });
+  </script>
+  <script src="contact.js"></script>
+</body>
+
+</html>

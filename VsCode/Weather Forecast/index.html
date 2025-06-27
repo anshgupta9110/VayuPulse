@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VayuPulse </title>
+  <link rel="stylesheet" href="index.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- EmailJS CDN -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+
+<body>
+  <nav>
+    <div class="logo">🌦️VayuPulse</div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="forecast.html">Forecast</a>
+      <a href="radar.html">Radar</a>
+      <a href="alerts.html">Alerts</a>
+      <a href="contact.html">Contact</a>
+      <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-text">Dark Mode</span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="dashboard">
+    <div class="left-panel">
+      <div id="clock" class="clock"></div>
+      <div class="weather-summary">
+        <div class="summary-card">
+          <h3>Today's Summary</h3>
+          <div class="summary-stats">
+            <div class="stat-item">
+              <span class="stat-label">Feels Like</span>
+              <span class="stat-value" id="feelsLike">--°</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">UV Index</span>
+              <span class="stat-value" id="uvIndex">--</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Visibility</span>
+              <span class="stat-value" id="visibility">-- km</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="center-panel">
+      <div class="condition-with-icon">
+        <img id="weatherIcon" class="condition-icon" alt="Weather Icon">
+        <div class="condition">Loading...</div>
+      </div>
+
+      <div class="description">Partly cloudy conditions<br>High 33°, Winds from WSW at 15 km/h</div>
+      
+      <div class="city-cards">
+        <div class="city-card">🌧️ Kochi <div>28°</div>
+        </div>
+        <div class="city-card">⛅ Kolkata <div>30°</div>
+        </div>
+        <div class="city-card">☀️ Pune <div>32°</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="big-temp" id="mainTemp">33°</div>
+      <div class="location">New Delhi</div>
+      <div class="wind">WSW at 15 km/h</div>
+      <div class="stats">
+        <div>💧 Humidity<br><strong>77%</strong></div>
+        <div>💧 Pressure<br><strong>1003 hPa</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- New Charts Section Below Dashboard -->
+  <section class="charts-section-main">
+    <div class="charts-grid">
+      <div class="chart-container">
+        <h3>Hourly Temperature</h3>
+        <canvas id="hourlyChart" class="modern-chart"></canvas>
+      </div>
+      
+      <div class="chart-container">
+        <h3>Humidity & Pressure</h3>
+        <canvas id="humidityChart" class="modern-chart"></canvas>
+      </div>
+      
+      <div class="chart-container">
+        <h3>Wind Speed</h3>
+        <canvas id="windChart" class="modern-chart"></canvas>
+      </div>
+      
+      <div class="chart-container">
+        <h3>Temperature Range</h3>
+        <div class="temp-range-display">
+          <div class="temp-min">
+            <span class="temp-label">Min</span>
+            <span class="temp-value" id="minTemp">--°C</span>
+          </div>
+          <div class="temp-bar">
+            <div class="temp-fill" id="tempFill"></div>
+          </div>
+          <div class="temp-max">
+            <span class="temp-label">Max</span>
+            <span class="temp-value" id="maxTemp">--°C</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Weather Notifications Section -->
+  <div class="notification-card">
+    <h3>📧 Weather Alerts</h3>
+    <p>Get notified about weather changes</p>
+    <form id="notificationForm" class="notification-form">
+      <input type="email" id="notificationEmail" placeholder="Enter your email" required>
+      <div class="notification-options">
+        <label class="checkbox-label">
+          <input type="checkbox" id="dailyUpdates" checked>
+          <span class="checkmark"></span>
+          Daily Updates
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" id="severeWeather" checked>
+          <span class="checkmark"></span>
+          Severe Weather
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" id="rainAlerts">
+          <span class="checkmark"></span>
+          Rain Alerts
+        </label>
+      </div>
+      <button type="submit" class="notification-btn">Subscribe</button>
+    </form>
+  </div>
+  
+  <!-- Loading indicator -->
+  <div id="loadingIndicator" class="loading-indicator">
+    <div class="loading-spinner"></div>
+    <p>Loading weather data...</p>
+  </div>
+
+  <div id="alertBox" class="alert-box"></div>
+
+  <footer>
+    © 2025 VayuPulse | Powered by WeatherAPI & RainViewer
+  </footer>
+
+  <script>
+    // Theme management with localStorage
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = themeToggle.querySelector('.theme-icon');
+      const themeText = themeToggle.querySelector('.theme-text');
+      
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Light Mode';
+      } else {
+        document.body.classList.remove('light-theme');
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'Dark Mode';
+      }
+    }
+
+    function toggleTheme() {
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = themeToggle.querySelector('.theme-icon');
+      const themeText = themeToggle.querySelector('.theme-text');
+      
+      document.body.classList.toggle('light-theme');
+      
+      if (document.body.classList.contains('light-theme')) {
+        localStorage.setItem('theme', 'light');
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'Light Mode';
+      } else {
+        localStorage.setItem('theme', 'dark');
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'Dark Mode';
+      }
+    }
+
+    // Initialize theme on page load
+    document.addEventListener('DOMContentLoaded', initTheme);
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forecast - VayuPulse</title>
+  <link rel="stylesheet" href="forecast.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav>
+    <div class="logo">🌦️VayuPulse</div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="forecast.html" class="active">Forecast</a>
+      <a href="radar.html">Radar</a>
+      <a href="alerts.html">Alerts</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <main class="dashboard">
+    <header class="top-bar">
+      <div class="search-section">
+        <input type="text" id="searchBox" placeholder="Search location..." />
+        <button type="button" class="search-btn">Search</button>
+      </div>
+      <button onclick="getUserLocation()" class="location-btn">📍Use My Location</button>
+    </header>
+
+    <section class="weather-overview">
+      <div class="location-info">
+        <h1 id="cityName">Loading...</h1>
+        <p id="dateTime"></p>
+        <h2 id="temp">--°C</h2>
+        <p id="condition">--</p>
+      </div>
+      <div class="weather-icon">
+        <img id="weatherIcon" src="" alt="Weather Icon" style="display: none;">
+      </div>
+    </section>
+
+    <section class="details-cards">
+      <div class="card" id="windCard">
+        <div class="card-icon">💨</div>
+        <div class="card-content">
+          <h3>Wind Speed</h3>
+          <p>-- km/h</p>
+        </div>
+      </div>
+      <div class="card" id="pressureCard">
+        <div class="card-icon">🌡️</div>
+        <div class="card-content">
+          <h3>Pressure</h3>
+          <p>-- hPa</p>
+        </div>
+      </div>
+      <div class="card" id="humidityCard">
+        <div class="card-icon">💧</div>
+        <div class="card-content">
+          <h3>Humidity</h3>
+          <p>--%</p>
+        </div>
+      </div>
+      <div class="card" id="uvCard">
+        <div class="card-icon">☀️</div>
+        <div class="card-content">
+          <h3>UV Index</h3>
+          <p>--</p>
+        </div>
+      </div>
+      <div class="card" id="rainCard">
+        <div class="card-icon">🌧️</div>
+        <div class="card-content">
+          <h3>Rain Chance</h3>
+          <p>--%</p>
+        </div>
+      </div>
+      <div class="card" id="aqiCard">
+        <div class="card-icon">🌬️</div>
+        <div class="card-content">
+          <h3>Air Quality</h3>
+          <p>--</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modern Charts Section -->
+    <section class="charts-section">
+      <div class="chart-grid">
+        <div class="chart-container">
+          <h3>Today's Temperature Trend</h3>
+          <canvas id="tempChart" class="modern-chart"></canvas>
+        </div>
+        
+        <div class="chart-container">
+          <h3>7-Day Forecast</h3>
+          <canvas id="weeklyChart" class="modern-chart"></canvas>
+        </div>
+        
+        <div class="chart-container">
+          <h3>Humidity & Pressure</h3>
+          <canvas id="humidityPressureChart" class="modern-chart"></canvas>
+        </div>
+        
+        <div class="chart-container">
+          <h3>Wind Speed Analysis</h3>
+          <canvas id="windChart" class="modern-chart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="weekly-forecast" id="weeklyForecast">
+      <h3>7-Day Forecast</h3>
+      <div class="forecast-cards">
+        <!-- 7-day forecast cards inserted by JS -->
+      </div>
+    </section>
+
+    <section class="radar-preview">
+      <h3>🌧️ Radar Preview</h3>
+      <div class="radar-container">
+        <iframe
+          src="https://www.rainviewer.com/map.html?loc=28.61,77.23,7&oFa=0&oC=0&oU=0&oCS=1&oF=0&c=7&o=83&lm=1&layer=radar&sm=1"
+          width="100%" height="300" frameborder="0"
+          style="border-radius: 16px; margin-top: 10px;" allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
+    <section class="recorded-weather">
+      <h3>Weather Records</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Temperature (°C)</th>
+              <th>Humidity (%)</th>
+              <th>Wind (km/h)</th>
+              <th>Condition</th>
+            </tr>
+          </thead>
+          <tbody id="recordedDataBody">
+            <!-- Filled by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Loading indicator -->
+  <div id="loadingIndicator" class="loading-indicator">
+    <div class="loading-spinner"></div>
+    <p>Loading forecast data...</p>
+  </div>
+
+  <div id="suggestionsContainer" class="suggestions-container"></div>
+
+  <script src="forecast.js"></script>
+  <script>
+    // Load saved theme on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+      } else {
+        document.body.classList.remove('light-theme');
+      }
+    });
+  </script>
+</body>
+</html>

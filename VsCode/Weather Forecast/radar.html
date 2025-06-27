@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Radar</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <link rel="stylesheet" href="radar.css" />
+</head>
+<body>
+  <nav>
+    <div class="logo">🌦️VayuPulse</div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="forecast.html">Forecast</a>
+      <a href="radar.html" class="active">Radar</a>
+      <a href="alerts.html">Alerts</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <div id="loader"><div class="spinner"></div><p>Loading radar data...</p></div>
+
+  <div id="map"></div>
+
+  <footer>© 2025 VayuPulse | Powered by WeatherAPI & RainViewer</footer>
+
+  <script>
+    // Load saved theme on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+      } else {
+        document.body.classList.remove('light-theme');
+      }
+    });
+  </script>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="radar.js"></script>
+</body>
+</html>
